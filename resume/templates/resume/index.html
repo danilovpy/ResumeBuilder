@@ -1,0 +1,94 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<div class="container">
+    <h1 class="text-center">Create your resume</h1>
+    <form action="/" method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="name">Your name:</label><br>
+                    <input type="text" class="form-control m-input" id="name" placeholder="e.g John Smith"  name="name"><br>
+                </div>
+                <div class="form-group">
+                    <label for="job">Job title:</label><br>
+                    <input type="text" class="form-control m-input" id="job" placeholder="e.g Senior C++ engineer" name="job"><br>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your email:</label><br>
+                    <input type="text" class="form-control m-input" id="email" placeholder="e.g JohnSmithDev@gmail.com" name="email"><br>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Your phone:</label><br>
+                    <input type="text" class="form-control m-input" id="phone" placeholder="e.g +1456452234" name="phone"><br>
+                </div>
+                <div class="form-group">
+                    <label for="about">About:</label><br>
+                    <textarea rows="5" cols="45" class="form-control m-input" name="about" placeholder="Your profile, about" id="about"></textarea><br>
+                </div>
+                <div class="form-group">
+                    <label for="university">Your education:</label><br>
+                    <textarea rows="3" cols="45"  class="form-control m-input"name="university" id="university"></textarea><br>
+                </div>
+            </div>
+            <div class="col">
+                <label for="skills">Skills:</label><br>
+                <div id="selector">
+                    <div id="inputFormRow">
+                        <div class="input-group mb-3">
+                            <input type="text" name="skills" class="form-control m-input" placeholder="Enter skill" autocomplete="off">
+                            <div class="input-group-append">
+                                <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="newRow"></div>
+                <button id="addRow" type="button" class="btn btn-info">Add Skill</button>
+                <br><br>
+                <label for="selector_experience">List your projects and/or work experience:</label>
+                <div id="selector_experience">
+                    <div id="inputFormRow">
+                        <div class="input-group mb-3">
+                            <input type="text" name="experience_title" class="form-control m-input" placeholder="Project/Job Title or position" autocomplete="off">
+                            <div class="input-group-append">
+                                <button id="removeRow" type="button" class="btn btn-danger">Remove</button>
+                            </div>
+                        </div>
+                       <br><textarea rows="3" cols="25" class="form-control m-input" name="experience" id="experience" placeholder="Experience Description"></textarea>
+                        <br>
+                    </div>
+                </div>
+
+                <div id="newRowExperience"></div>
+                <button id="addRowExperience" type="button" class="btn btn-info">Add another work experience</button>
+
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+
+<script type="text/javascript">
+    // add row
+    let skillhtml = '';
+    let experiencehtml = '';
+    skillhtml = $("#selector").html();
+    $("#addRow").click(function () {
+
+
+        $('#newRow').append(skillhtml);
+    });
+    experiencehtml =$("#selector_experience").html();
+    $("#addRowExperience").click(function () {
+
+
+        $('#newRowExperience').append(experiencehtml);
+    });
+    // remove row
+    $(document).on('click', '#removeRow', function () {
+        $(this).closest('#inputFormRow').remove();
+    });
+</script>
